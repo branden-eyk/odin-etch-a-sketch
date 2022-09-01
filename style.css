@@ -1,0 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Satisfy);
+@import url(https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap);
+
+body{
+    background-color: rgb(204, 0, 0);
+}
+
+.title-container{
+    display: flex;
+    justify-content: center;
+}
+
+.tagline{
+    font-family: Roboto;
+    color: goldenrod;
+}
+
+.title{
+    font-family: Satisfy;
+    color:goldenrod;
+    margin: 10px 50px 0px 50px;
+}
