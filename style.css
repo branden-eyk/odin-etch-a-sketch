@@ -18,5 +18,15 @@ body{
 .title{
     font-family: Satisfy;
     color:goldenrod;
-    margin: 10px 50px 0px 50px;
+    margin: 10px 50px 10px 50px;
+}
+
+.screen-container{
+    text-align: center;
+    height: 512px;
+    width: 512px;
+    margin: 0 auto;
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
 }
