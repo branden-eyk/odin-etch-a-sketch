@@ -1,11 +1,13 @@
 initialize();
 
+//Event listeners for button funtionality
 const clearBtn = document.querySelector('.rightBtn');
 clearBtn.addEventListener('click', clear);
 
 const menuBtn = document.querySelector('.leftBtn');
 menuBtn.addEventListener('click', toggleModal);
 
+//Event listeners for closing of the model
 const closeBtn = document.querySelector('.closeBtn');
 closeBtn.addEventListener('click', toggleModal);
 
@@ -33,7 +35,7 @@ function initialize(screenSize = 16){
 
 //Function for changing the background colour of the divs that make up the screen (A.K.A pixels)
 function handleHover(e){
-    e.currentTarget.style.backgroundColor = 'black';
+    e.target.style.backgroundColor = 'black';
 }
 
 //Function for clearing the screen
