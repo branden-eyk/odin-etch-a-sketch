@@ -1,6 +1,20 @@
 initialize();
+
 const clearBtn = document.querySelector('.rightBtn');
 clearBtn.addEventListener('click', clear);
+
+const menuBtn = document.querySelector('.leftBtn');
+menuBtn.addEventListener('click', toggleModal);
+
+const closeBtn = document.querySelector('.closeBtn');
+closeBtn.addEventListener('click', toggleModal);
+
+const modalBackground = document.querySelector('.modal-container');
+modalBackground.addEventListener('click', function(e){
+    if(e.target === modalBackground){
+        toggleModal(e);
+    }
+});
 
 //Function that sets up the drawing space A.K.A screen
 function initialize(screenSize = 16){
@@ -39,4 +53,10 @@ function clear(e){
     pixels.forEach((pixel) => {
         pixel.style.backgroundColor ='white';
     });
+}
+
+//Function for displaying and closing options menu modal
+function toggleModal(e){
+    const modal = document.querySelector('.modal-container');
+    modal.classList.toggle("hidden");
 }
