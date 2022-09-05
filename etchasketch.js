@@ -25,14 +25,19 @@ sizeSlider.addEventListener('input', adjustSize);
 //Event Lister for colour mode radio buttons
 const radios = document.querySelectorAll('input[type="radio"]');
 for (const radio of radios){
-    radio.addEventListener('click', );
+    radio.addEventListener('click', () => initialize());
 }
 
 //Function that sets up the drawing space A.K.A screen
-function initialize(screenSize = 16){
+function initialize(){
     const screen = document.querySelector('.screen-container');
     const colourMode = getColourMode();
+    const screenSize = document.querySelector('.size-slider').value;
     
+    if(screen.hasChildNodes){
+        removeAllChildren(screen);
+    }
+
     for (let i = 0; i < (screenSize * screenSize); i++){
         const pixel = document.createElement('div');
         pixel.style.height = `${100 / screenSize}%`;
@@ -99,13 +104,11 @@ function removeAllChildren(node){
 }
 
 //Function for providing functionality to the screen size slider
-function adjustSize(value){
+function adjustSize(e){
+    const value = e.target.value;
     const sliderValue = document.querySelector('.slider-value');
-    const screenContainer = document.querySelector('.screen-container');
-
     sliderValue.textContent = `${value} x ${value}`;
-    removeAllChildren(screenContainer);
-    initialize(value);
+    initialize();
 }
 
 //Function for getting the colour mode based on the radio buttons in the options menu
