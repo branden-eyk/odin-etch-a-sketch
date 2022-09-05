@@ -18,12 +18,20 @@ modalBackground.addEventListener('click', function(e){
     }
 });
 
+//Event Listener for screen size slider
 const sizeSlider = document.querySelector('.size-slider');
 sizeSlider.addEventListener('input', adjustSize);
+
+//Event Lister for colour mode radio buttons
+const radios = document.querySelectorAll('input[type="radio"]');
+for (const radio of radios){
+    radio.addEventListener('click', );
+}
 
 //Function that sets up the drawing space A.K.A screen
 function initialize(screenSize = 16){
     const screen = document.querySelector('.screen-container');
+    const colourMode = getColourMode();
     
     for (let i = 0; i < (screenSize * screenSize); i++){
         const pixel = document.createElement('div');
@@ -31,14 +39,31 @@ function initialize(screenSize = 16){
         pixel.style.width = `${100 / screenSize}%`;
         pixel.style.backgroundColor = 'white';
         pixel.classList.add('pixel');
-        pixel.addEventListener('mouseenter', handleHover);
+
+        switch (colourMode) {
+            case 'classic-black':
+                pixel.addEventListener('mouseenter', handleHover);
+                break;
+            case 'surprise':
+                pixel.addEventListener('mouseenter', handleHoverColour);
+                break
+            default:
+                pixel.addEventListener('mouseenter', handleHover);
+                break;
+        }
         screen.appendChild(pixel);
     }
 }
 
-//Function for changing the background colour of the divs that make up the screen (A.K.A pixels)
+//Function for changing the background colour of the divs that make up the screen (A.K.A pixels) to black
 function handleHover(e){
     e.target.style.backgroundColor = 'black';
+}
+
+//Function for changing background colour of the pixels to a random colour
+function handleHoverColour(e){
+    const hue = Math.floor(Math.random() * 360);
+    e.target.style.backgroundColor = `hsl(${hue} 100% 50%)`;
 }
 
 //Function for clearing the screen
@@ -74,12 +99,21 @@ function removeAllChildren(node){
 }
 
 //Function for providing functionality to the screen size slider
-function adjustSize(e){
-    const value = e.target.value;
+function adjustSize(value){
     const sliderValue = document.querySelector('.slider-value');
     const screenContainer = document.querySelector('.screen-container');
 
     sliderValue.textContent = `${value} x ${value}`;
     removeAllChildren(screenContainer);
     initialize(value);
+}
+
+//Function for getting the colour mode based on the radio buttons in the options menu
+function getColourMode(){
+    const radios = document.querySelectorAll('input[type="radio"]');
+    for(const radio of radios){
+        if (radio.checked){
+            return radio.value;
+        }
+    };
 }
