@@ -18,6 +18,9 @@ modalBackground.addEventListener('click', function(e){
     }
 });
 
+const sizeSlider = document.querySelector('.size-slider');
+sizeSlider.addEventListener('input', adjustSize);
+
 //Function that sets up the drawing space A.K.A screen
 function initialize(screenSize = 16){
     const screen = document.querySelector('.screen-container');
@@ -39,7 +42,7 @@ function handleHover(e){
 }
 
 //Function for clearing the screen
-function clear(e){
+function clear(){
     const body = document.querySelector('body');
     const pixels = document.querySelectorAll('.pixel');
     
@@ -58,7 +61,25 @@ function clear(e){
 }
 
 //Function for displaying and closing options menu modal
-function toggleModal(e){
+function toggleModal(){
     const modal = document.querySelector('.modal-container');
     modal.classList.toggle("hidden");
+}
+
+//Function for removing all children from a node
+function removeAllChildren(node){
+    while(node.hasChildNodes()){
+        node.removeChild(node.lastChild);
+    }
+}
+
+//Function for providing functionality to the screen size slider
+function adjustSize(e){
+    const value = e.target.value;
+    const sliderValue = document.querySelector('.slider-value');
+    const screenContainer = document.querySelector('.screen-container');
+
+    sliderValue.textContent = `${value} x ${value}`;
+    removeAllChildren(screenContainer);
+    initialize(value);
 }
